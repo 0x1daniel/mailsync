@@ -1,0 +1,114 @@
+/* = RESET = */
+* {
+    padding: 0; margin: 0;
+    box-sizing: border-box;
+
+    font-family: monospace;
+    font-size: 1rem;
+    color: #212121;
+}
+
+/* = MAIN LAYOUT = */
+header, footer {
+    margin: 20px 0;
+    text-align: center;
+}
+
+main {
+    margin: 30px auto;
+    max-width: 550px;
+}
+
+footer, footer * {
+    color: #DDDDDD;
+}
+
+/* = TYPOGRAPHY = */
+h2 { font-size: 1.4rem; }
+
+/* = INPUTS = */
+input {
+    margin: 10px 0;
+    padding: 3px 5px;
+    border: none; outline: none;
+    border-bottom: 1px solid #DDDDDD;
+    display: block;
+    width: 100%;
+
+    transition: .2s border-bottom-color ease-in-out;
+}
+
+input:hover {
+    border-bottom-color: #212121;
+}
+
+input:focus {
+    border-bottom-color: #2979FF;
+}
+
+/* = BUTTONS = */
+button {
+    margin: 20px auto;
+    padding: 8px 40px;
+    border: none; outline: none;
+    border-radius: 2px;
+    display: block;
+    background-color: #2979FF;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 25px rgba(41, 121, 255, 0.5);
+
+    transition: .2s background-color ease-in-out, .15s box-shadow ease-in-out;
+}
+
+button:hover {
+    background-color: #448AFF;
+}
+
+button:active {
+    background-color: #2962FF;
+    box-shadow: none;
+}
+
+/* = FORMS = */
+form {
+    margin: 20px auto;
+    max-width: 300px;
+}
+
+form form-group {
+    display: block;
+    margin: 5px 0;
+}
+
+form form-group > label:after {
+    content: ":";
+    display: inline-block;
+}
+
+/* = FLASH = */
+flash {
+    margin-bottom: 20px;
+    padding: 8px 0;
+    width: 100%;
+    display: block;
+    background-color: #DDDDDD;
+    text-align: center;
+}
+
+flash.error {
+    background-color: #FF1744;
+    color: #FFFFFF;
+}
+
+flash.info {
+    background-color: #2979FF;
+    color: #FFFFFF;
+}
+
+flash.success {
+    background-color: #00E676;
+    color: #FFFFFF;
+}

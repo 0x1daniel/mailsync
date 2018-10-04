@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require 'sqlite3'
+
+raise 'no/wrong details given' if ARGV.length != 2
+
+username = ARGV[0]
+new_username = ARGV[1]
+
+db = SQLite3::Database.new 'data/database.db'
+db.execute 'UPDATE users SET username=? WHERE username=?', [new_username, username]

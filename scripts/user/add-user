@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require 'sqlite3'
+require 'bcrypt'
+
+raise 'no/wrong details given' if ARGV.length != 2
+
+username = ARGV[0]
+password = ARGV[1]
+password = BCrypt::Password.create password
+
+db = SQLite3::Database.new 'data/database.db'
+db.execute 'INSERT INTO users(username, password) VALUES (?,?)', [username, password]
