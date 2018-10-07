@@ -2,8 +2,4 @@
 require_relative '../lib/mailsync'
 
 DB_PATH = File.join(Dir.pwd, 'data/database.db')
-
-db = MailSync::Database.new DB_PATH
-MailSync::Server.set_db = db
-
-MailSync::Server.run!
+MailSync.run DB_PATH

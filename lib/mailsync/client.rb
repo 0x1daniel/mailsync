@@ -19,14 +19,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-require_relative 'mailsync/database'
-require_relative 'mailsync/client'
-require_relative 'mailsync/server'
+require_relative 'client/imap'
 
 module MailSync
-  def self.run(database)
-    db = MailSync::Database.new DB_PATH
-    MailSync::Server.set_db = db
-    MailSync::Server.run!
+module Client
+  def self.connect_imap(details, password)
+    imap = Client::IMAP.new(details)
+    imap.connect(password)
+    imap
   end
+end
 end

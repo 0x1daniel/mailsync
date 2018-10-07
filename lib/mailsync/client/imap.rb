@@ -19,14 +19,31 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-require_relative 'mailsync/database'
-require_relative 'mailsync/client'
-require_relative 'mailsync/server'
+require 'net/imap'
 
 module MailSync
-  def self.run(database)
-    db = MailSync::Database.new DB_PATH
-    MailSync::Server.set_db = db
-    MailSync::Server.run!
+module Client
+  class IMAP
+    def initialize(details)
+      @details = details
+    end
+
+    def connect(password)
+      @connection = Net::IMAP.new(
+        @details[:server_in_host], @details[:server_in_port],
+        @details[:server_in_use_tls], nil, false
+      )
+      @connection.login(@details[:email], password)
+    end
+
+    def status
+      raise 'No connection opened.' if @connection.nil?
+      status = @connection.status('INBOX', ['MESSAGES', 'UNSEEN'])
+      {
+        :total => status['MESSAGES'],
+        :unseen => status['UNSEEN'],
+      }
+    end
   end
+end
 end

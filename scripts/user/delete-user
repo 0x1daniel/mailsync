@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require 'sqlite3'
-require 'bcrypt'
 
 raise 'no/wrong details given' if ARGV.length != 1
 

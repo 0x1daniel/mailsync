@@ -28,7 +28,7 @@ module MailSync
             set :bind, '0.0.0.0'
             set :port, 8080
             set :public_folder, 'static'
-            set :views, 'lib/mailsync/views'
+            set :views, 'views'
             set :db, nil
 
             enable :sessions

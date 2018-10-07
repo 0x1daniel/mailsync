@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+require 'sqlite3'
+require 'bcrypt'
+require_relative '../../lib/mailsync/client'
+
+raise 'no/wrong details given' if ARGV.length != 4
+
+user = ARGV[0]
+user_password = ARGV[1]
+email = ARGV[2]
+email_password = ARGV[3]
+
+db = SQLite3::Database.new 'data/database.db'
+user = db.get_first_row 'SELECT id,password FROM users WHERE username=? LIMIT 1', [user]
+raise 'incorrect password' if BCrypt::Password.new(user[1]) != user_password
+account = db.query 'SELECT * FROM accounts WHERE user=? AND email=? LIMIT 1', [user[0], email]
+account.each_hash do |h|
+  account = h
+end
+details = {
+  email: email,
+  server_in_host: account['server_in_host'],
+  server_in_port: account['server_in_port'],
+  server_in_use_tls: account['server_in_use_tls']
+}
+imap = MailSync::Client.connect_imap(details, email_password)
+puts imap.status
