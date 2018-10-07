@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+require 'sqlite3'
+require 'bcrypt'
+
+raise 'no/wrong details given' if ARGV.length != 5
+
+user = ARGV[0]
+email = ARGV[1]
+server_in_host = ARGV[2]
+server_in_port = ARGV[3].to_i
+server_in_use_tls = (ARGV[4] == 'true') ? 1 : 0
+
+db = SQLite3::Database.new 'data/database.db'
+db.execute 'INSERT INTO accounts(user, email, server_in_host, server_in_port, server_in_use_tls) VALUES ((SELECT id FROM users WHERE username=? LIMIT 1),?,?,?,?)', [user, email, server_in_host, server_in_port, server_in_use_tls]

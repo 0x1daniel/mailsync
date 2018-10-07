@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require 'sqlite3'
+require 'bcrypt'
+
+raise 'no/wrong details given' if ARGV.length != 1
+
+email = ARGV[0]
+
+db = SQLite3::Database.new 'data/database.db'
+db.execute 'DELETE FROM accounts WHERE email=?', [email]
